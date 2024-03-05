@@ -10,6 +10,7 @@ In order to be able to easily access this data and to not lose it in the event t
   - This helps reduce cost of storing the infrequently-accessed data while allowing us to retain flexibility on when and how we want to use it.
   - The data starts in Standard storage, then, if it's not accessed, progressively sinks into more colder storage: to Nearline (after 1 months), Coldline (after a fu
   - With Autoclass, there are no retrieval costs and no early deletion costs.
+  - See more on Autoclass cost considerations in this ticket: https://github.com/opentargets/issues/issues/3232.
 * The bucket has [object versioning](https://cloud.google.com/storage/docs/object-versioning) enabled for the purposes of data recovery.
   - In addition to a live version of the object, at most **one** archive version is kept. This version will survive if the file is overwritten or deleted.
   - Archive versions will be deleted after **14 days,** so any data which is overwritten or deleted will need to be recovered in this time frame.
