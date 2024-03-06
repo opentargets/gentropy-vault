@@ -22,4 +22,4 @@ See [**common instructions**](ingest_vm.md) to set up a VM for ingesting any dat
 | Name | Vault link | Source platform | Date mirrored | Size |
 | ---- | ---- | ---- | ---- | ---- |
 | [UKB PPP](datasets/ukb-ppp.md) | `gs://gentropy-vault/ukb-ppp` | Synapse | 2024-03-01 | 8.53 TB |
-| [deCODE proteomics](datasets/decode-proteomics) | `gs://gentropy-vault/decode-proteomics` | deCODE | 2024-03-05 | 4.26 TB |
+| [deCODE proteomics](datasets/decode-proteomics.md) | `gs://gentropy-vault/decode-proteomics` | deCODE | 2024-03-05 | 4.26 TB |
