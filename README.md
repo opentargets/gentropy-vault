@@ -19,6 +19,7 @@ In order to be able to easily access this data and to not lose it in the event t
 ## Datasets and ingestion instructions
 See [**common instructions**](ingest_vm.md) to set up a VM for ingesting any dataset. For each dataset, the specific instructions on how exactly it was ingested must also be kept. The table below lists the datasets currently mirrored. Link on the dataset name leads to detailed instructions and notes.
 
-| Name | Vault link | Source platform | Date mirrored |
-| ---- | ---- | ---- | ---- |
-| [UKB PPP](datasets/ukb_ppp.md) | `gs://gentropy-vault/ukb-ppp` | Synapse | 2024-03-01 |
+| Name | Vault link | Source platform | Date mirrored | Size |
+| ---- | ---- | ---- | ---- | ---- |
+| [UKB PPP](datasets/ukb-ppp.md) | `gs://gentropy-vault/ukb-ppp` | Synapse | 2024-03-01 | 8.53 TB |
+| [deCODE proteomics](datasets/decode-proteomics) | `gs://gentropy-vault/decode-proteomics` | deCODE | 2024-03-05 | 4.26 TB |
