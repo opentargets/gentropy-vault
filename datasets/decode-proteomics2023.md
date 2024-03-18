@@ -1,5 +1,4 @@
 # deCODE proteomics2023
-
 Mirror started on 2024-03-13 as `gs://gentropy-vault/decode-proteomics2023`.
 
 ## 1. Obtain download links
@@ -105,7 +104,7 @@ time parallel \
     --bar \
     --eta \
     --keep-order \
-    "zcat {} | md5sum | sed -e 's/-/{.}/'" \
+    "zcat {} | md5sum | sed -e 's|-|{.}|'" \
     :::: \
     <(find -name '*.gz' | cut -d/ -f2-) \
     > ../md5-check/downloaded.txt
