@@ -79,7 +79,45 @@ time parallel \
     ~/urls-with-filenames.txt
 ```
 
-## 6. Download extra files
+## 6. Check MD5 sums
+> [!NOTE]
+> While the downloaded files are in GZIP format, the MD5 sums provided with them are for _uncompressed_ data. Hence, we uncompress it before computing the downloaded MD5 sum.
+```bash
+mkdir ../md5-check
+
+# Extract source MD5 sums.
+function source_md5 () {
+    cut -d" " -f1 $1 | tr -d "\n"
+    echo $2
+}
+export -f source_md5
+time parallel \
+    --bar \
+    --eta \
+    --keep-order \
+    source_md5 {} {.} \
+    :::: \
+    <(cut -f2 ~/urls-with-filenames.txt | grep md5sum | sort) \
+    > ../md5-check/source.txt
+
+# Compute downloaded MD5 sums.
+time parallel \
+    --bar \
+    --eta \
+    --keep-order \
+    "zcat {}.gz | md5sum | sed -e 's/-/{}/'" \
+    :::: \
+    ../md5-check/source.txt \
+    > ../md5-check/downloaded.txt
+```
+
+> [!WARNING]
+> After computing, verify that the MD5 sums match and the command below does not output anything:
+```bash
+diff ../md5-check/source.txt ../md5-check/downloaded.txt
+```
+
+## 7. Download extra files
 Download the one extra file named “Read me file” and then run the command:
 ```bash
 gsutil cp \
