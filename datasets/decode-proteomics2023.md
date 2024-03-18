@@ -105,9 +105,9 @@ time parallel \
     --bar \
     --eta \
     --keep-order \
-    "zcat {}.gz | md5sum | sed -e 's/-/{}/'" \
+    "zcat {} | md5sum | sed -e 's/-/{.}/'" \
     :::: \
-    <(awk "print $2" ../md5-check/source.txt) \
+    <(find -name '.gz' | cut -d/ -f2-) \
     > ../md5-check/downloaded.txt
 ```
 
