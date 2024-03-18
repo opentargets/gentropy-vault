@@ -88,7 +88,7 @@ mkdir ../md5-check
 # Extract source MD5 sums.
 function source_md5 () {
     cut -d" " -f1 $1 | tr -d "\n"
-    echo $2
+    echo "  $2"
 }
 export -f source_md5
 time parallel \
@@ -107,7 +107,7 @@ time parallel \
     --keep-order \
     "zcat {}.gz | md5sum | sed -e 's/-/{}/'" \
     :::: \
-    ../md5-check/source.txt \
+    <(awk "print $2" ../md5-check/source.txt) \
     > ../md5-check/downloaded.txt
 ```
 
