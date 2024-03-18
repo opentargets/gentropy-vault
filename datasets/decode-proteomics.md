@@ -82,6 +82,12 @@ time parallel \
     > ../md5-check/downloaded.txt
 ```
 
+> [!WARNING]
+> After computing, verify that the MD5 sums match and the command below does not output anything:
+```bash
+diff ../md5-check/source.txt ../md5-check/downloaded.txt
+```
+
 ## 7. Download extra files
 Download the three extra files named “Extra annotation”, “Excluded variants”, and “Read me file” and then run the command on your local machine:
 ```bash
