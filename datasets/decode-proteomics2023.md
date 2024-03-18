@@ -107,7 +107,7 @@ time parallel \
     --keep-order \
     "zcat {} | md5sum | sed -e 's/-/{.}/'" \
     :::: \
-    <(find -name '.gz' | cut -d/ -f2-) \
+    <(find -name '*.gz' | cut -d/ -f2-) \
     > ../md5-check/downloaded.txt
 ```
 
