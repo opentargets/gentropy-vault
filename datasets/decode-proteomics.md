@@ -77,7 +77,7 @@ time parallel \
     --eta \
     --keep-order \
     "zcat {} | md5sum | sed -e 's/-/{.}/'" \
-    :::: \
+    ::: \
     *.gz \
     > ../md5-check/downloaded.txt
 ```
