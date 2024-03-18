@@ -66,8 +66,24 @@ time parallel \
     ~/urls-with-filenames.txt
 ```
 
-## 6. Download extra files
-Download the three extra files named “Extra annotation”, “Excluded variants”, and “Read me file” and then run the command:
+## 6. Check MD5 sums
+> [!NOTE]
+> While the downloaded files are in GZIP format, the MD5 sums provided with them are for _uncompressed_ data. Hence, we uncompress it before computing the downloaded MD5 sum.
+```bash
+mkdir ../md5-check
+cat *.md5sum | sed -e 's|assocs_filtered/||g' > ../md5-check/source.txt
+time parallel \
+    --bar \
+    --eta \
+    --keep-order \
+    "zcat {} | md5sum | sed -e 's/-/{.}/'" \
+    :::: \
+    *.gz \
+    > ../md5-check/downloaded.txt
+```
+
+## 7. Download extra files
+Download the three extra files named “Extra annotation”, “Excluded variants”, and “Read me file” and then run the command on your local machine:
 ```bash
 gsutil cp \
     proteomics_readme.txt \
