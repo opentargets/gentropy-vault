@@ -54,6 +54,9 @@ cat /tmp/decode-proteomics2023.*.final.txt > ~/urls-with-filenames.txt
 ```bash
 # Define a function to fetch one file.
 function fetch () {
+    # If a file already exists, this means there was a previous failed attempt to download it.
+    # Wait for a minute until trying to download it again.
+    [ -e "$2" ] && sleep 60
     curl \
         --connect-timeout 600 \
         --max-time 3600 \
@@ -69,7 +72,7 @@ time parallel \
     --eta \
     --jobs 64 \
     --joblog ~/decode-proteomics2023.log \
-    --retries 100 \
+    --retries 180 \
     --colsep "\t" \
     fetch {1} {2} \
     :::: \
