@@ -1,4 +1,4 @@
-# deCODE proteomics
+# deCODE proteomics2023
 
 Mirror started on 2024-03-13 as `gs://gentropy-vault/decode-proteomics2023`.
 
