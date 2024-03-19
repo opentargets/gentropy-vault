@@ -1,5 +1,5 @@
 # deCODE proteomics2023
-Mirror started on 2024-03-13 as `gs://gentropy-vault/decode-proteomics2023`.
+Mirror started on 2024-03-13 and completed on 2024-03-19 as `gs://gentropy-vault/decode-proteomics2023`.
 
 ## 1. Obtain download links
 1. Go to the dataset hosted on deCODE: https://www.decode.com/summarydata/.
