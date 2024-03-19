@@ -127,6 +127,7 @@ time parallel \
     --bar \
     --eta \
     gzip -t \
+    {}.gz \
     :::: \
     <(grep d41d8cd98f00b204e9800998ecf8427e md5-check/source.txt | awk '{print $2}')
 ```
