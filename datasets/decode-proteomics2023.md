@@ -82,7 +82,7 @@ time parallel \
 > [!NOTE]
 > While the downloaded files are in GZIP format, the MD5 sums provided with them are for _uncompressed_ data. Hence, we uncompress it before computing the downloaded MD5 sum.
 ```bash
-mkdir ../md5-check
+mkdir md5-check
 
 # Extract source MD5 sums.
 function source_md5 () {
@@ -97,7 +97,7 @@ time parallel \
     source_md5 {} {.} \
     :::: \
     <(cut -f2 ~/urls-with-filenames.txt | grep md5sum | sort) \
-    > ../md5-check/source.txt
+    > md5-check/source.txt
 
 # Compute downloaded MD5 sums.
 time parallel \
@@ -107,16 +107,31 @@ time parallel \
     "zcat {} | md5sum | sed -e 's|-|{.}|'" \
     :::: \
     <(find -name '*.gz' | cut -d/ -f2-) \
-    > ../md5-check/downloaded.txt
+    > md5-check/downloaded.txt
+```
+
+After computing, verify that the MD5 sums match.
+> [!WARNING]
+> There is an issue with source MD5 sums for exactly 1,000 files: their reference MD5 sum is specified as d41d8cd98f00b204e9800998ecf8427e (which is MD5 of an empty byte stream). For this reason, we expect the diff below to be exactly 2,002 lines long (2,000 lines + 2 technical output lines).
+```bash
+diff md5-check/source.txt md5-check/downloaded.txt
 ```
 
 > [!WARNING]
-> After computing, verify that the MD5 sums match and the command below does not output anything:
+> There is a rare occasional issue with deCODE server where it returns a successful, but empty output. If the output of the above command is more than 2,002 lines long, make sure to manually check and fix the broken files.
+
+## 7. Additionally check files without an MD5 sum
+As we cannot check files with an incorrect reference MD5 sum fully, let's at least test that they are valid GZIP archives:
 ```bash
-diff ../md5-check/source.txt ../md5-check/downloaded.txt
+time parallel \
+    --bar \
+    --eta \
+    gzip -t \
+    :::: \
+    <(grep d41d8cd98f00b204e9800998ecf8427e md5-check/source.txt | awk '{print $2}')
 ```
 
-## 7. Download extra files
+## 8. Download extra files
 Download the one extra file named “Read me file” and then run the command:
 ```bash
 gsutil cp \
